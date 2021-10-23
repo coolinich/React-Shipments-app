@@ -5,11 +5,11 @@ import {
     DELETE_SHIPMENT,
 } from './types';
 
-import ShipmentService from '../services/ShipmentService';
+import {getAll, create, update, remove} from '../services/ShipmentService';
 
 export const retrieveShipments = () => async (dispatch) => {
     try {
-        const res = await ShipmentService.getAll();
+        const res = await getAll();
 
         dispatch({
           type: RETRIEVE_SHIPMENTS,
@@ -22,7 +22,7 @@ export const retrieveShipments = () => async (dispatch) => {
 
 export const createShipment = (data) => async (dispatch) => {
     try {
-        const res = await ShipmentService.create(data);
+        const res = await create(data);
 
         dispatch({
           type: CREATE_SHIPMENT,
@@ -37,7 +37,7 @@ export const createShipment = (data) => async (dispatch) => {
 
 export const updateShipment = (id, data) => async (dispatch) => {
     try {
-        const res = await ShipmentService.update(id, data);
+        const res = await update(id, data);
 
         dispatch({
           type: UPDATE_SHIPMENT,
@@ -52,7 +52,7 @@ export const updateShipment = (id, data) => async (dispatch) => {
 
 export const deleteShipment = (id) => async (dispatch) => {
     try {
-        await ShipmentService.remove(id);
+        await remove(id);
 
         dispatch({
           type: DELETE_SHIPMENT,

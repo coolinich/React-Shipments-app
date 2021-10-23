@@ -1,40 +1,21 @@
-import http from "../http-common";
+import { axiosConfig } from "../http-common";
 
-const getAll = () => {
-  return http.get("/shipments");
+export const getAll =  async () => {
+   return await axiosConfig.get("/shipments");
 };
 
-const create = data => {
-  return http.post("/shipments", data);
+export const create = async (data) => {
+  return (await axiosConfig.post("/shipments", data)).data;
 };
 
-const update = (id, data) => {
-  return http.put(`/shipments/${id}`, data);
+export const update = async (id, data) => {
+  return (await axiosConfig.put(`/shipments/${id}`, data)).data;
 };
 
-const remove = id => {
-  return http.delete(`/shipments/${id}`);
+export const remove = async (id) => {
+  return (await axiosConfig.delete(`/shipments/${id}`)).data;
 };
 
-
-const get = id => {
-    return http.get(`/shipments/${id}`);
+export const get = async (id) => {
+  return (await axiosConfig.get(`/shipments/${id}`)).data;
 };
-
-// const removeAll = () => {
-//   return http.delete(`/tutorials`);
-// };
-
-// const findByTitle = title => {
-//   return http.get(`/tutorials?title=${title}`);
-// };
-
-const ShipmentService = {
-  getAll,
-  create,
-  update,
-  remove,
-  get
-};
-
-export default ShipmentService;
