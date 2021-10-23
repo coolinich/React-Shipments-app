@@ -13,3 +13,15 @@
   max-width: 300px;
   margin: auto;
 }
+
+.text-danger.validation-message {
+  font-size: .8rem;
+}
+
+button {
+  margin-top: .5rem;
+}
+
+button + button {
+  margin-left: .25rem;
+}

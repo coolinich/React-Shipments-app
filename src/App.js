@@ -2,8 +2,8 @@ import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import ShipmentsList from './components/ShipmentsList';
-import AddShipmentItem from './components/AddShipmentItem';
-import ShipmentItem from "./components/ShipmentItem";
+import { AddShipmentItem } from './components/AddShipmentItem';
+import { ShipmentItem } from "./components/ShipmentItem";
 
 function App() {
   return (
