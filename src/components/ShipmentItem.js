@@ -1,15 +1,18 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { remove, update } from "../services/ShipmentService";
 import { getShipmentById, selectCurrentItem, selectShipmentList } from '../reducers/shipments2';
 import { useFormik } from "formik";
 import * as Yup from 'yup';
+import { CAlert } from '@coreui/react'
 import '../App.css';
 
 
 export const ShipmentItem = (props) => {
     const dispatch = useDispatch();
+    const [visible, setVisible] = useState(false);
+    const [errorMessage, setErrorMessage] = useState('');
     const currentItem = useSelector(selectCurrentItem);
     let history = useHistory();
 
@@ -49,7 +52,8 @@ export const ShipmentItem = (props) => {
 
             }
             catch (error) {
-               console.log(error);
+               setVisible(true);
+               setErrorMessage(error);
             }
         },
     }); 
@@ -60,7 +64,9 @@ export const ShipmentItem = (props) => {
             formik.handleReset();
             history.push("/shipments");
         } catch (error) {
-            console.log('test delete error ', error);
+            // console.log('test delete error ', error);
+            setVisible(true);
+            setErrorMessage(error.message);
         }
         
     }
@@ -181,6 +187,14 @@ export const ShipmentItem = (props) => {
                             >
                                 Delete
                             </button>
+                            <CAlert
+                                color="danger"
+                                dismissible
+                                visible={visible}
+                                onClose={() => setVisible(false)}
+                            >
+                                Test alert {errorMessage}
+                            </CAlert>
                         </form>
                     </div>
                 ) :
