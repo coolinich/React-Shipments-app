@@ -16,12 +16,17 @@
 
 /*** Button styles begin ***/
 button {
-  margin-top: .5rem;
+  /* margin-top: .5rem; */
 }
 
-button + button {
+.action-buttons_wrapper {
+  margin: .5rem 0; 
+}
+
+button + button, button + a, a + button {
   margin-left: .25rem;
 }
+
 /*** Button styles end ***/
 
 /*** Accordion styles begin ***/

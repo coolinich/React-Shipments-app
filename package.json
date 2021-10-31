@@ -4,6 +4,8 @@
   "private": true,
   "dependencies": {
     "@coreui/coreui": "^4.0.5",
+    "@coreui/icons": "^2.1.0",
+    "@coreui/icons-react": "^2.0.0",
     "@coreui/react": "^4.0.0",
     "@reduxjs/toolkit": "^1.6.2",
     "@testing-library/jest-dom": "^5.14.1",

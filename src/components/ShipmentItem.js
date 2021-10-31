@@ -13,6 +13,7 @@ export const ShipmentItem = (props) => {
     const dispatch = useDispatch();
     const [visible, setVisible] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
+    const [message, setMessage] = useState('');
     const currentItem = useSelector(selectCurrentItem);
     let history = useHistory();
 
@@ -22,7 +23,7 @@ export const ShipmentItem = (props) => {
     
     useEffect(() => {
         formik.setValues(currentItem);
-    }, [currentItem, formik]);
+    }, [currentItem]);
 
     const validationSchema = Yup.object().shape({
         orderNo: Yup.string().required("Order number is required"),
@@ -48,12 +49,15 @@ export const ShipmentItem = (props) => {
         onSubmit: async (values) => {
             try {
                 const response = await update(values.orderNo, values);
-                console.log(response);
-
+                setVisible(true);
+                setErrorMessage('');
+                setMessage('Order updated successfully!');
+                console.log('submit triggered');
             }
             catch (error) {
                setVisible(true);
-               setErrorMessage(error);
+               setErrorMessage(error.message);
+               setMessage('');
             }
         },
     }); 
@@ -66,6 +70,7 @@ export const ShipmentItem = (props) => {
         } catch (error) {
             setVisible(true);
             setErrorMessage(error.message);
+            setMessage('');
         }
         
     }
@@ -176,23 +181,28 @@ export const ShipmentItem = (props) => {
                                     {formik.errors.consignee ? formik.errors.consignee : null}
                                 </div>
                             </div>
-                            <button type="submit" className="btn btn-primary">
-                                Update
-                            </button>
-                            <button
-                                type="button"
-                                className="btn btn-danger"
-                                onClick={deleteShipmentData}
-                            >
-                                Delete
-                            </button>
+                            <div className="action-buttons_wrapper">
+                                <button type="submit" className="btn btn-primary">
+                                    Update
+                                </button>
+                                <button
+                                    type="button"
+                                    className="btn btn-danger"
+                                    onClick={deleteShipmentData}
+                                >
+                                    Delete
+                                </button>
+                            </div>
                             <CAlert
-                                color="danger"
-                                dismissible
+                                color={ errorMessage ? "danger" : "success" }
                                 visible={visible}
-                                onClose={() => setVisible(false)}
+                                onClick={() => {
+                                    setVisible(false);
+                                    setMessage('');
+                                    setErrorMessage('');
+                                }}
                             >
-                                {errorMessage}
+                                { errorMessage ? errorMessage : message }
                             </CAlert>
                         </form>
                     </div>

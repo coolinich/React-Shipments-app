@@ -42,12 +42,18 @@ export const ShipmentsList = () => {
                                                     <div
                                                         className="accordion-header_title"
                                                     >
-                                                        {shipment.orderNo}
+                                                        <label className="shipment-data_label">
+                                                            Order:
+                                                        </label>
+                                                        {" "}{shipment.orderNo}
                                                     </div>
                                                     <div
                                                         className="accordion-header_subtitle"
                                                     >
-                                                        {shipment.customer}
+                                                        <label className="shipment-data_label">
+                                                            Customer:
+                                                        </label>
+                                                        {" "}{shipment.customer}
                                                     </div>
                                                 </div>
                                             </CAccordionHeader>
@@ -56,7 +62,7 @@ export const ShipmentsList = () => {
                                                 currentShipment ?
                                                 (
                                                     <div>
-                                                        <h4>Details about order: {currentShipment.orderNo}</h4>
+                                                        <h4>Details</h4>
                                                         <div>
                                                             <label className="shipment-data_label">
                                                                 Delivery date:
