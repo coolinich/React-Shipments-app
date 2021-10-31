@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
+import { React, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { remove, update } from "../services/ShipmentService";
-import { getShipmentById, selectCurrentItem, selectShipmentList } from '../reducers/shipments2';
+import { getShipmentById, selectCurrentItem } from '../reducers/shipments2';
 import { useFormik } from "formik";
 import * as Yup from 'yup';
 import { CAlert } from '@coreui/react'
@@ -22,7 +22,7 @@ export const ShipmentItem = (props) => {
     
     useEffect(() => {
         formik.setValues(currentItem);
-    }, [currentItem]);
+    }, [currentItem, formik]);
 
     const validationSchema = Yup.object().shape({
         orderNo: Yup.string().required("Order number is required"),
@@ -64,7 +64,6 @@ export const ShipmentItem = (props) => {
             formik.handleReset();
             history.push("/shipments");
         } catch (error) {
-            // console.log('test delete error ', error);
             setVisible(true);
             setErrorMessage(error.message);
         }
@@ -84,7 +83,7 @@ export const ShipmentItem = (props) => {
                                     type="text"
                                     className="form-control"
                                     id="orderNo"
-                                    required
+                                    disabled
                                     value={formik?.values?.orderNo}
                                     onChange={formik.handleChange}
                                     name="orderNo"
@@ -193,7 +192,7 @@ export const ShipmentItem = (props) => {
                                 visible={visible}
                                 onClose={() => setVisible(false)}
                             >
-                                Test alert {errorMessage}
+                                {errorMessage}
                             </CAlert>
                         </form>
                     </div>

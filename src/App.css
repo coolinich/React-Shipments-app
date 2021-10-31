@@ -1,9 +1,4 @@
-.list {
-  text-align: left;
-  max-width: 750px;
-  margin: auto;
-}
-
+/*** Form styles begin ***/
 .submit-form {
   max-width: 300px;
   margin: auto;
@@ -17,7 +12,9 @@
 .text-danger.validation-message {
   font-size: .8rem;
 }
+/*** Form styles end ***/
 
+/*** Button styles begin ***/
 button {
   margin-top: .5rem;
 }
@@ -25,3 +22,30 @@ button {
 button + button {
   margin-left: .25rem;
 }
+/*** Button styles end ***/
+
+/*** Accordion styles begin ***/
+.accordion-button {
+  margin-top: 0;
+}
+
+.accordion-header_wrapper {
+  display: flex;
+  width: 90%;
+  flex-direction: column;
+}
+
+.accordion-header_title {
+}
+
+.accordion-header_subtitle {
+  flex: 1; 
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.shipment-data_label {
+  font-weight: 600;
+}
+/*** Accordion styles end  ***/
