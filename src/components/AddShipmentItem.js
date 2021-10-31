@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import { React, useState } from "react";
 import { useFormik } from "formik";
 import { create } from "../services/ShipmentService";
+import { Link } from "react-router-dom";
 import * as Yup from 'yup';
 import '../App.css';
 
@@ -49,9 +50,18 @@ export const AddShipmentItem = () => {
             {submitted ?
                 (<div>
                     <h4>You submitted successfully!</h4>
-                    <button className="btn btn-success" onClick={newShipment}>
-                      Add
-                    </button>
+                    <div className="action-buttons_wrapper">
+                        <button className="btn btn-success" onClick={newShipment}>
+                            Add more
+                        </button>
+                        <Link
+                            type="button"
+                            className="btn btn-success"
+                            to={"/shipments/"}
+                            className="btn btn-light">
+                            View all shipments
+                        </Link>
+                    </div>
                   </div>) :
                 (
                     <form onSubmit={formik.handleSubmit} noValidate>
@@ -154,9 +164,11 @@ export const AddShipmentItem = () => {
                                 {formik.errors.consignee ? formik.errors.consignee : null}
                             </div>
                         </div>
-                        <button type="submit" className="btn btn-primary">
-                            Submit
-                        </button>
+                        <div className="action-buttons_wrapper">
+                            <button type="submit" className="btn btn-primary">
+                                Submit
+                            </button>
+                        </div>
                     </form>
                 )
             }

@@ -1,0 +1,310 @@
+{
+  "uuid": "de5e7763-0d4b-4807-869b-c3ab5a08f7a5",
+  "lastMigration": 18,
+  "name": "Shipment-app",
+  "endpointPrefix": "api",
+  "latency": 0,
+  "port": 3002,
+  "hostname": "0.0.0.0",
+  "routes": [
+    {
+      "uuid": "c3884012-7f81-416e-b877-1c46378d36ba",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "shipments",
+      "responses": [
+        {
+          "uuid": "8f1198c1-3d9d-446a-98c0-e9b4b5189f08",
+          "body": "",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "",
+              "value": ""
+            }
+          ],
+          "filePath": "/Users/ok/Projects/shipments-app/Shipments.json",
+          "sendFileAsBody": true,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false
+        },
+        {
+          "uuid": "b2a4dd29-e714-41c4-b09e-954a55d1835a",
+          "body": "{\n  \"message\": \"No data to show\"\n}",
+          "latency": 0,
+          "statusCode": 500,
+          "label": "",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/javascript"
+            }
+          ],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "query",
+              "modifier": "err",
+              "value": "1",
+              "operator": "equals"
+            }
+          ],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false
+        }
+      ],
+      "enabled": true,
+      "randomResponse": false,
+      "sequentialResponse": false
+    },
+    {
+      "uuid": "2b565244-2d8b-4eff-b7c4-5a754f8fbe43",
+      "documentation": "",
+      "method": "post",
+      "endpoint": "shipments",
+      "responses": [
+        {
+          "uuid": "53ef2fe5-46dd-4c06-bab0-cc1372334150",
+          "body": "{{ body }} ",
+          "latency": 0,
+          "statusCode": 201,
+          "label": "",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false
+        },
+        {
+          "uuid": "d13b1d62-6136-477e-8c37-d6673f857b57",
+          "body": "{\n  \"message\": \"Incorrect data\"\n}",
+          "latency": 0,
+          "statusCode": 400,
+          "label": "",
+          "headers": [],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "body",
+              "modifier": "customer",
+              "value": "error400",
+              "operator": "equals"
+            }
+          ],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false
+        },
+        {
+          "uuid": "6b054b76-7ac6-47a3-8a3a-19a3a7edba8f",
+          "body": "{\n  \"message\": \"Internal server error\"\n}",
+          "latency": 0,
+          "statusCode": 500,
+          "label": "",
+          "headers": [],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "body",
+              "modifier": "customer",
+              "value": "error500",
+              "operator": "equals"
+            }
+          ],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false
+        }
+      ],
+      "enabled": true,
+      "randomResponse": false,
+      "sequentialResponse": false
+    },
+    {
+      "uuid": "20314114-1d61-411b-9f28-b3dd0dc7e36a",
+      "documentation": "",
+      "method": "put",
+      "endpoint": "shipments/:id",
+      "responses": [
+        {
+          "uuid": "aec4b71c-7d12-431f-a4eb-d4407a803874",
+          "body": "{{ body }}",
+          "latency": 0,
+          "statusCode": 204,
+          "label": "",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false
+        },
+        {
+          "uuid": "7d842e67-f4c6-43ba-aedf-9c78fcc3ac94",
+          "body": "{\n  \"message\": \"Incorrect data\"\n}",
+          "latency": 0,
+          "statusCode": 400,
+          "label": "",
+          "headers": [],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "body",
+              "modifier": "customer",
+              "value": "error400",
+              "operator": "equals"
+            }
+          ],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false
+        }
+      ],
+      "enabled": true,
+      "randomResponse": false,
+      "sequentialResponse": false
+    },
+    {
+      "uuid": "37df7663-f4f0-48ef-8222-72829e69512a",
+      "documentation": "",
+      "method": "delete",
+      "endpoint": "shipments/:id",
+      "responses": [
+        {
+          "uuid": "73e4c9fc-fa8f-45fa-aa39-cb3a25b4d8c9",
+          "body": "",
+          "latency": 0,
+          "statusCode": 204,
+          "label": "",
+          "headers": [
+            {
+              "key": "",
+              "value": ""
+            }
+          ],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false
+        },
+        {
+          "uuid": "1cce1fcb-1c65-4581-a9ec-6dbff60988aa",
+          "body": "{\n  message: \"Smth went wrong!\"\n}",
+          "latency": 0,
+          "statusCode": 400,
+          "label": "",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "params",
+              "modifier": "id",
+              "value": "lh-164038-58922533-4712164",
+              "operator": "equals"
+            }
+          ],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false
+        }
+      ],
+      "enabled": true,
+      "randomResponse": false,
+      "sequentialResponse": false
+    },
+    {
+      "uuid": "353c4b90-3337-4217-bebe-54ed361709f0",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "shipments/:id",
+      "responses": [
+        {
+          "uuid": "a92d4f06-f055-4f6c-9980-20f12563983f",
+          "body": "{\n    \"orderNo\": \"{{ urlParam 'id' }}\",\n    \"date\": \"10/22/2019\",\n    \"customer\": \"NXP Semiconductors N.V.\",\n    \"trackingNo\": \"TP-724057-72553473-5647860\",\n    \"status\": \"'Delivered'\",\n    \"consignee\": \"Koppers Holdings Inc.\"\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false
+        }
+      ],
+      "enabled": true,
+      "randomResponse": false,
+      "sequentialResponse": false
+    }
+  ],
+  "proxyMode": false,
+  "proxyHost": "",
+  "proxyRemovePrefix": false,
+  "https": false,
+  "cors": false,
+  "headers": [
+    {
+      "key": "Content-Type",
+      "value": "application/json"
+    },
+    {
+      "key": "Access-Control-Allow-Origin",
+      "value": "*"
+    },
+    {
+      "key": "Access-Control-Allow-Methods",
+      "value": "GET,POST,PUT,PATCH,DELETE,HEAD,OPTIONS"
+    },
+    {
+      "key": "Access-Control-Allow-Headers",
+      "value": "Content-Type, Origin, Accept, Authorization, Content-Length, X-Requested-With"
+    }
+  ],
+  "proxyReqHeaders": [
+    {
+      "key": "",
+      "value": ""
+    }
+  ],
+  "proxyResHeaders": [
+    {
+      "key": "",
+      "value": ""
+    }
+  ]
+}

@@ -1,15 +1,19 @@
-import React, { useEffect } from "react";
+import { React, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { remove, update } from "../services/ShipmentService";
-import { getShipmentById, selectCurrentItem, selectShipmentList } from '../reducers/shipments2';
+import { getShipmentById, selectCurrentItem } from '../reducers/shipments2';
 import { useFormik } from "formik";
 import * as Yup from 'yup';
+import { CAlert } from '@coreui/react'
 import '../App.css';
 
 
 export const ShipmentItem = (props) => {
     const dispatch = useDispatch();
+    const [visible, setVisible] = useState(false);
+    const [errorMessage, setErrorMessage] = useState('');
+    const [message, setMessage] = useState('');
     const currentItem = useSelector(selectCurrentItem);
     let history = useHistory();
 
@@ -45,11 +49,15 @@ export const ShipmentItem = (props) => {
         onSubmit: async (values) => {
             try {
                 const response = await update(values.orderNo, values);
-                console.log(response);
-
+                setVisible(true);
+                setErrorMessage('');
+                setMessage('Order updated successfully!');
+                console.log('submit triggered');
             }
             catch (error) {
-               console.log(error);
+               setVisible(true);
+               setErrorMessage(error.message);
+               setMessage('');
             }
         },
     }); 
@@ -60,7 +68,9 @@ export const ShipmentItem = (props) => {
             formik.handleReset();
             history.push("/shipments");
         } catch (error) {
-            console.log('test delete error ', error);
+            setVisible(true);
+            setErrorMessage(error.message);
+            setMessage('');
         }
         
     }
@@ -78,7 +88,7 @@ export const ShipmentItem = (props) => {
                                     type="text"
                                     className="form-control"
                                     id="orderNo"
-                                    required
+                                    disabled
                                     value={formik?.values?.orderNo}
                                     onChange={formik.handleChange}
                                     name="orderNo"
@@ -171,16 +181,29 @@ export const ShipmentItem = (props) => {
                                     {formik.errors.consignee ? formik.errors.consignee : null}
                                 </div>
                             </div>
-                            <button type="submit" className="btn btn-primary">
-                                Update
-                            </button>
-                            <button
-                                type="button"
-                                className="btn btn-danger"
-                                onClick={deleteShipmentData}
+                            <div className="action-buttons_wrapper">
+                                <button type="submit" className="btn btn-primary">
+                                    Update
+                                </button>
+                                <button
+                                    type="button"
+                                    className="btn btn-danger"
+                                    onClick={deleteShipmentData}
+                                >
+                                    Delete
+                                </button>
+                            </div>
+                            <CAlert
+                                color={ errorMessage ? "danger" : "success" }
+                                visible={visible}
+                                onClick={() => {
+                                    setVisible(false);
+                                    setMessage('');
+                                    setErrorMessage('');
+                                }}
                             >
-                                Delete
-                            </button>
+                                { errorMessage ? errorMessage : message }
+                            </CAlert>
                         </form>
                     </div>
                 ) :
